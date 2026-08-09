@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<div class="container py-5">
+
+
+<h1 class="text-center mb-5">
+    Our Fresh Meat Shop 🥩
+</h1>
+
+
+
+<!-- Search -->
+
+<div class="row mb-4">
+
+<div class="col-md-6 mx-auto">
+
+<input type="text"
+       class="form-control"
+       placeholder="Search meat...">
+
+</div>
+
+</div>
+
+
+
+<div class="row">
+
+
+{% for product in products %}
+
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+
+<div class="card shadow h-100">
+
+
+{% if product.image %}
+
+<img src="{{ product.image.url }}"
+class="card-img-top"
+style="height:250px;object-fit:cover;">
+
+{% endif %}
+
+
+
+<div class="card-body">
+
+
+<h4>
+{{ product.name }}
+</h4>
+
+
+<p>
+{{ product.category }}
+</p>
+
+
+<h5 class="text-danger">
+₦{{ product.price }}
+</h5>
+
+
+<p>
+Stock: {{ product.stock }}
+</p>
+
+
+<a href="{% url 'product_detail' product.id %}" 
+class="btn btn-primary">
+    View Product
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+{% empty %}
+
+
+<h3 class="text-center">
+No meat available
+</h3>
+
+
+{% endfor %}
+
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<div class="card shadow p-4">
+
+<div class="text-center">
+
+<h2>
+🥩 PrimeMeat Invoice
+</h2>
+
+<p>
+Fresh Meat Delivery System
+</p>
+
+</div>
+
+<hr>
+
+
+<h4>
+Invoice No: PM-{{ order.id }}
+</h4>
+
+
+<p>
+<strong>Customer:</strong>
+{{ order.full_name }}
+</p>
+
+
+<p>
+<strong>Phone:</strong>
+{{ order.phone }}
+</p>
+
+
+<p>
+<strong>Address:</strong>
+{{ order.address }}
+</p>
+
+
+<p>
+<strong>Status:</strong>
+{{ order.status }}
+</p>
+
+
+{% if order.payment_reference %}
+
+<p>
+<strong>Payment Reference:</strong>
+{{ order.payment_reference }}
+</p>
+
+{% endif %}
+
+
+<hr>
+
+
+<h5>
+Products
+</h5>
+
+
+<table class="table table-bordered">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>
+Product
+</th>
+
+<th>
+Quantity
+</th>
+
+<th>
+Price
+</th>
+
+<th>
+Subtotal
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+{% for item in order.items.all %}
+
+<tr>
+
+<td>
+{{ item.product.name }}
+</td>
+
+
+<td>
+{{ item.quantity }}
+</td>
+
+
+<td>
+₦{{ item.price }}
+</td>
+
+
+<td>
+₦{{ item.subtotal }}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</tbody>
+
+</table>
+
+
+<h3 class="text-end">
+
+Total:
+₦
+
+{% with total=0 %}
+
+{% for item in order.items.all %}
+
+{{ item.subtotal|add:total }}
+
+{% endfor %}
+
+{% endwith %}
+
+</h3>
+
+
+<hr>
+
+
+<div class="text-center">
+
+
+
+
+
+<a href="{% url 'download_invoice' order.id %}"
+class="btn btn-success">
+
+📥 Download PDF
+
+</a>
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<h2>
+🔔 Notifications
+</h2>
+
+
+{% for notification in notifications %}
+
+<div class="alert alert-info">
+
+{{ notification.message }}
+
+<br>
+
+<small>
+{{ notification.created_at }}
+</small>
+
+</div>
+
+
+{% empty %}
+
+<div class="alert alert-warning">
+
+No notifications yet.
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+{% endblock %}

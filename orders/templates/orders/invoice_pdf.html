@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body {
+    font-family: Arial;
+    font-size: 14px;
+}
+
+h2 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+}
+
+.total {
+    text-align: right;
+    font-size: 18px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h2>
+🥩 PrimeMeat Invoice
+</h2>
+
+
+<hr>
+
+
+<h3>
+Invoice No: PM-{{ order.id }}
+</h3>
+
+
+<p>
+Customer: {{ order.full_name }}
+</p>
+
+
+<p>
+Phone: {{ order.phone }}
+</p>
+
+
+<p>
+Address: {{ order.address }}
+</p>
+
+
+<p>
+Status: {{ order.status }}
+</p>
+
+
+<hr>
+
+
+<h3>
+Products
+</h3>
+
+
+<table>
+
+<tr>
+
+<th>
+Product
+</th>
+
+<th>
+Quantity
+</th>
+
+<th>
+Price
+</th>
+
+<th>
+Subtotal
+</th>
+
+</tr>
+
+
+{% for item in order.items.all %}
+
+<tr>
+
+<td>
+{{ item.product.name }}
+</td>
+
+
+<td>
+{{ item.quantity }}
+</td>
+
+
+<td>
+₦{{ item.price }}
+</td>
+
+
+<td>
+₦{{ item.subtotal }}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+<br>
+
+
+<h3 class="total">
+
+PrimeMeat 🥩
+
+</h3>
+
+
+</body>
+
+</html>
